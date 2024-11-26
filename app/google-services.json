@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "387359526626",
+    "project_id": "musiclibraryfinal",
+    "storage_bucket": "musiclibraryfinal.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387359526626:android:20df8eae491cdaf5d818bb",
+        "android_client_info": {
+          "package_name": "com.example.musiclibraryfinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ9J4NPW6i7O_XW2HnruT221WbyWQcsV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
