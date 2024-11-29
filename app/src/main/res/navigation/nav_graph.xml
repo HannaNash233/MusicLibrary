@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.musiclibraryfinal.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_addSongFragment"
+            app:destination="@id/addSongFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_deleteSongFragment"
+            app:destination="@id/deleteSongFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_playSongFragment"
+            app:destination="@id/playSongFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSongFragment"
+        android:name="com.example.musiclibraryfinal.addSongFragment"
+        android:label="fragment_add_song"
+        tools:layout="@layout/fragment_add_song" >
+        <action
+            android:id="@+id/action_addSongFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_addSongFragment_to_deleteSongFragment"
+            app:destination="@id/deleteSongFragment" />
+        <action
+            android:id="@+id/action_addSongFragment_to_playSongFragment"
+            app:destination="@id/playSongFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deleteSongFragment"
+        android:name="com.example.musiclibraryfinal.deleteSongFragment"
+        android:label="fragment_delete_song"
+        tools:layout="@layout/fragment_delete_song" >
+        <action
+            android:id="@+id/action_deleteSongFragment_to_addSongFragment"
+            app:destination="@id/addSongFragment" />
+        <action
+            android:id="@+id/action_deleteSongFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_deleteSongFragment_to_playSongFragment"
+            app:destination="@id/playSongFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playSongFragment"
+        android:name="com.example.musiclibraryfinal.playSongFragment"
+        android:label="fragment_play_song"
+        tools:layout="@layout/fragment_play_song" >
+        <action
+            android:id="@+id/action_playSongFragment_to_deleteSongFragment"
+            app:destination="@id/deleteSongFragment" />
+        <action
+            android:id="@+id/action_playSongFragment_to_addSongFragment"
+            app:destination="@id/addSongFragment" />
+        <action
+            android:id="@+id/action_playSongFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+</navigation>
