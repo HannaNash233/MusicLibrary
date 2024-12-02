@@ -36,19 +36,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // linking firebase database
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("users")
+
         // signing up the user
         email = findViewById<EditText>(R.id.tiet_email)
         pass = findViewById<EditText>(R.id.tiet_pwd)
         passConfirm = findViewById<EditText>(R.id.tiet_pwdConfirm)
 
+        val emailText = email.text.toString()
+        val passText = pass.text.toString()
+        val passConfirmText = passConfirm.text.toString()
+
         signup = findViewById(R.id.signUpBTN)
         signup.setOnClickListener{
-            val emailText = email.text.toString()
-            val passText = pass.text.toString()
-            val passConfirmText = passConfirm.text.toString()
+
            // haven't added into database
             if (emailText.isEmpty() || passText.isEmpty() || passConfirmText.isEmpty()){
                 Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
@@ -76,7 +76,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-        // create example songs?
+
+        // linking firebase database
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("users")
+        val user = User(emailText, passText, passConfirmText)
+
+
+
 
 
     }
