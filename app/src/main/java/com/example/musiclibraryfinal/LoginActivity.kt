@@ -3,6 +3,7 @@ package com.example.musiclibraryfinal
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -31,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
+        Log.d("debug", "Test", )
         auth = FirebaseAuth.getInstance()
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
@@ -59,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                     // Proceed to next screen
-                    val intent = Intent(this, Connected:: class.java)
+                    val intent = Intent(this, connectedActivity:: class.java)
                     // intent.putExtra(NOTE_ID, "HELLO")
                     startActivity(intent)
                 } else {
