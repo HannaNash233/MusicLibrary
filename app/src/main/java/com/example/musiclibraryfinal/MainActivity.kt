@@ -2,6 +2,7 @@ package com.example.musiclibraryfinal
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -35,19 +36,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // linking firebase database
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("users")
+
         // signing up the user
         email = findViewById<EditText>(R.id.tiet_email)
         pass = findViewById<EditText>(R.id.tiet_pwd)
         passConfirm = findViewById<EditText>(R.id.tiet_pwdConfirm)
 
+        val emailText = email.text.toString()
+        val passText = pass.text.toString()
+        val passConfirmText = passConfirm.text.toString()
+
         signup = findViewById(R.id.signUpBTN)
         signup.setOnClickListener{
-            val emailText = email.text.toString()
-            val passText = pass.text.toString()
-            val passConfirmText = passConfirm.text.toString()
+
            // haven't added into database
             if (emailText.isEmpty() || passText.isEmpty() || passConfirmText.isEmpty()){
                 Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
@@ -59,7 +60,8 @@ class MainActivity : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(emailText, passText).addOnCompleteListener(this){task ->
                     if(task.isSuccessful){
                         Toast.makeText(this, "Sign up successful!", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, Connected::class.java)
+                        val intent = Intent(this, connectedActivity::class.java)
+                        Log.d("debug", "Test", )
                         startActivity(intent)
                     }
                     else {
@@ -69,15 +71,19 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
-
         login = findViewById(R.id.loginBTN)
-
         login.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-        // create example songs?
+
+        // linking firebase database
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("users")
+        val user = User(emailText, passText, passConfirmText)
+
+
+
 
 
     }
