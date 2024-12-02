@@ -47,32 +47,36 @@ class MainActivity : AppCompatActivity() {
         val passConfirmText = passConfirm.text.toString()
 
         signup = findViewById(R.id.signUpBTN)
-        signup.setOnClickListener{
+        signup.setOnClickListener {
 
-           // haven't added into database
-            if (emailText.isEmpty() || passText.isEmpty() || passConfirmText.isEmpty()){
+            // haven't added into database
+            if (emailText.isEmpty() || passText.isEmpty() || passConfirmText.isEmpty()) {
                 Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
             }
-            if (passText != passConfirmText){
-                passConfirm.error="Passwords do not match"
+            if (passText != passConfirmText) {
+                passConfirm.error = "Passwords do not match"
             } else {
                 passConfirm.error = null
-                auth.createUserWithEmailAndPassword(emailText, passText).addOnCompleteListener(this){task ->
-                    if(task.isSuccessful){
-                        Toast.makeText(this, "Sign up successful!", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, connectedActivity::class.java)
-                        Log.d("debug", "Test", )
-                        startActivity(intent)
+                auth.createUserWithEmailAndPassword(emailText, passText)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Sign up successful!", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, connectedActivity::class.java)
+                            Log.d("debug", "Test",)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "Sign up failed: ${task.exception?.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
-                    else {
-                        Toast.makeText(this, "Sign up failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                    }
-                }
             }
 
         }
         login = findViewById(R.id.loginBTN)
-        login.setOnClickListener{
+        login.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
@@ -81,6 +85,18 @@ class MainActivity : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("users")
         val user = User(emailText, passText, passConfirmText)
+
+        // read database
+        myRef.child(emailText).get().addOnSuccessListener { snapshot ->
+            if (snapshot.exists()) {
+                val user = snapshot.getValue(User::class.java)
+                if (user != null) {
+                    Toast.makeText(this, "Email: ${user.email}", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "no such user", Toast.LENGTH_SHORT).show()
+            }
+        }
 
 
 
