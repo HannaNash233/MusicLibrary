@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -20,9 +21,9 @@ class MainActivity : AppCompatActivity() {
     private var playlist = mutableListOf<Song>()
     private lateinit var login: Button
     private lateinit var signup: Button
-    private lateinit var email: EditText
-    private lateinit var pass: EditText
-    private lateinit var passConfirm: EditText
+    private lateinit var email: TextInputEditText
+    private lateinit var pass: TextInputEditText
+    private lateinit var passConfirm: TextInputEditText
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,65 +39,52 @@ class MainActivity : AppCompatActivity() {
 
 
         // signing up the user
-        email = findViewById<EditText>(R.id.tiet_email)
-        pass = findViewById<EditText>(R.id.tiet_pwd)
-        passConfirm = findViewById<EditText>(R.id.tiet_pwdConfirm)
+        email = findViewById<TextInputEditText>(R.id.tiet_email)
+        pass = findViewById<TextInputEditText>(R.id.tiet_pwd)
+        passConfirm = findViewById<TextInputEditText>(R.id.tiet_pwdConfirm)
 
-        val emailText = email.text.toString()
-        val passText = pass.text.toString()
-        val passConfirmText = passConfirm.text.toString()
 
-        signup = findViewById(R.id.signUpBTN)
-        signup.setOnClickListener {
 
-            // haven't added into database
-            if (emailText.isEmpty() || passText.isEmpty() || passConfirmText.isEmpty()) {
+        signup = findViewById<Button>(R.id.signUpBTN)
+        auth = FirebaseAuth.getInstance()
+
+        signup.setOnClickListener{
+            val emailText = email.text.toString()
+            val passText = pass.text.toString()
+            val passConfirmText = passConfirm.text.toString()
+
+            if (emailText.isEmpty() || passText.isEmpty() || passConfirmText.isEmpty()){
                 Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
             }
-            if (passText != passConfirmText) {
+
+            if (passText != passConfirmText){
                 passConfirm.error = "Passwords do not match"
             } else {
                 passConfirm.error = null
-                auth.createUserWithEmailAndPassword(emailText, passText)
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            Toast.makeText(this, "Sign up successful!", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, connectedActivity::class.java)
-                            Log.d("debug", "Test",)
-                            startActivity(intent)
-                        } else {
-                            Toast.makeText(
-                                this,
-                                "Sign up failed: ${task.exception?.message}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-            }
 
+                auth.createUserWithEmailAndPassword(emailText, passText).addOnCompleteListener(this){task ->
+                    if(task.isSuccessful){
+                        Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, ConnectedActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else {
+                        Toast.makeText(this, "Sign up failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
+
+
         login = findViewById(R.id.loginBTN)
         login.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
-        // linking firebase database
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("users")
-        val user = User(emailText, passText, passConfirmText)
 
-        // read database
-        myRef.child(emailText).get().addOnSuccessListener { snapshot ->
-            if (snapshot.exists()) {
-                val user = snapshot.getValue(User::class.java)
-                if (user != null) {
-                    Toast.makeText(this, "Email: ${user.email}", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(this, "no such user", Toast.LENGTH_SHORT).show()
-            }
-        }
+
+
 
 
 
