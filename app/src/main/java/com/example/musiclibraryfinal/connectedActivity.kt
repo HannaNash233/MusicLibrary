@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 
 class connectedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +25,8 @@ class connectedActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        setupActionBarWithNavController(findNavController(R.id.nav_host_fragment))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -38,5 +42,10 @@ class connectedActivity : AppCompatActivity() {
             R.id.menuLogout -> Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show()
         }
         return true
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp()||super.onSupportNavigateUp()
     }
 }
