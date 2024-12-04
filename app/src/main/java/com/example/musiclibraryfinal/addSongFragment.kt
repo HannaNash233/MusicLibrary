@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +25,11 @@ class addSongFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var database: FirebaseDatabase
+    private lateinit var addBtn: Button
+    private lateinit var songTitleEdit: EditText
+    private lateinit var artistEdit: EditText
+    private lateinit var genreEdit: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +49,38 @@ class addSongFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        database = FirebaseDatabase.getInstance()
+        val ref = database.getReference("playlist")
+        addBtn = view.findViewById<Button>(R.id.addBTN)
+        songTitleEdit = view.findViewById<EditText>(R.id.songTitleEdit)
+        artistEdit = view.findViewById<EditText>(R.id.artistEdit)
+        genreEdit = view.findViewById<EditText>(R.id.genreEdit)
+        val yearEdit = view.findViewById<EditText>(R.id.yearEdit)
+
+
+
+        addBtn.setOnClickListener {
+            val songTitle = songTitleEdit.text.toString()
+            val artistName = artistEdit.text.toString()
+            val genre = genreEdit.text.toString()
+            val year = yearEdit.text.toString()
+
+            if(songTitle.isEmpty() || artistName.isEmpty() || genre.isEmpty() || year.isEmpty()){
+                Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                val song = Song(songTitle, artistName, genre, year.toInt())
+
+                ref.child(songTitle).setValue(song).addOnSuccessListener {
+                    Toast.makeText(this, "Song saved in playlist!", Toast.LENGTH_SHORT).show()
+                }
+                    .addOnFailureListener{
+                        Toast.makeText(this, "Failed to save data", Toast.LENGTH_SHORT).show()
+                    }
+            }
+            // add fragment code
+        }
+
 
         val backButton: Button = view.findViewById(R.id.backButton)
         backButton.setOnClickListener {
