@@ -13,14 +13,15 @@
         android:id="@+id/rvSongs"
         android:layout_width="411dp"
         android:layout_height="597dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="130dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addButton"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:text="Add Song"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,6 +31,7 @@
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="80dp"
         android:text="Delete Song"
         app:layout_constraintEnd_toEndOf="parent"
