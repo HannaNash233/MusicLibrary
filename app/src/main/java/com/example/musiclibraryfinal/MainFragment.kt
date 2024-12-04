@@ -71,4 +71,11 @@ class MainFragment : Fragment() {
                 }
             }
     }
+    private fun createSongs():List<Song> {
+        val songs = mutableListOf<Song>()
+        for (i in 1..50) {
+            songs.add(Song("Song $i", "Artist $i", "Throat singing", 1999))
+        }
+        return songs
+    }
 }
