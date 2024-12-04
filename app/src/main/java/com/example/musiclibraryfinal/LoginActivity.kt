@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                     // Proceed to next screen
-                    val intent = Intent(this, connectedActivity:: class.java)
+                    val intent = Intent(this, ConnectedActivity:: class.java)
                     // intent.putExtra(NOTE_ID, "HELLO")
                     startActivity(intent)
                 } else {
