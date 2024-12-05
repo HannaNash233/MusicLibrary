@@ -17,8 +17,8 @@ import com.google.firebase.database.FirebaseDatabase
 
 //data class Music(val title: String, val artist: String, val genre: String)
 class MainActivity : AppCompatActivity() {
-    private lateinit var playlistRecyclerView: RecyclerView
-    private var playlist = mutableListOf<Song>()
+    //private lateinit var playlistRecyclerView: RecyclerView
+    //private var playlist = mutableListOf<Song>()
     private lateinit var login: Button
     private lateinit var signup: Button
     private lateinit var email: TextInputEditText
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(emailText, passText).addOnCompleteListener(this){task ->
                     if(task.isSuccessful){
                         Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, ConnectedActivity::class.java)
+                        val intent = Intent(this, connectedActivity::class.java)
                         startActivity(intent)
                     }
                     else {
