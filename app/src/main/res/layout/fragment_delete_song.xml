@@ -12,7 +12,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop="-250dp"
         android:layout_gravity="center"
-        android:text="Deleting a Song by title"
+        android:text="Deleting a Song by Title"
         android:textSize="25sp" />
 
 
