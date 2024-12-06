@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +31,35 @@ class deleteSongFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+        val deleteBTN = findViewById<Button>(R.id.deleteBTN)
+        val songTitleEdit = findViewById<EditText>(R.id.songTitleEdit)
+
+        deleteBTN.setOnClickListener {
+            val songTitle = songTitleEdit.text.toString()
+
+            if (songTitle.isEmpty()) {
+                Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                // Initialize Firebase Database reference
+                val database = FirebaseDatabase.getInstance() //.reference
+
+                val myRef =
+                    database.getReference("users")
+
+                val userRef = myRef.child(songTitle)
+
+                userRef.removeValue()
+                    .addOnSuccessListener {
+                        // Song deleted successfully
+                        Toast.makeText(this, "Song successfully deleted.", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        // Handle failure
+                        Toast.makeText(this, "Error deleting song", Toast.LENGTH_SHORT).show()
+                    }
+            }
         }
     }
 
