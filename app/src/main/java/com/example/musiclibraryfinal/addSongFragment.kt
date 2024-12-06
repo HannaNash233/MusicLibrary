@@ -60,25 +60,26 @@ class addSongFragment : Fragment() {
 
 
 
+
         addBtn.setOnClickListener {
             val songTitle = songTitleEdit.text.toString()
             val artistName = artistEdit.text.toString()
             val genre = genreEdit.text.toString()
             val year = yearEdit.text.toString()
 
-            if(songTitle.isEmpty() || artistName.isEmpty() || genre.isEmpty() || year.isEmpty()){
-                Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
+            if (songTitle.isEmpty() || artistName.isEmpty() || genre.isEmpty() || year.isEmpty()){
+                Toast.makeText(activity, "Please fill out all fields", Toast.LENGTH_SHORT).show()
             } else {
                 val song = Song(songTitle, artistName, genre, year.toInt())
 
                 ref.child(songTitle).setValue(song).addOnSuccessListener {
-                    Toast.makeText(this, "Song saved in playlist!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Song officially added", Toast.LENGTH_SHORT).show()
+                }.addOnFailureListener {
+                    Toast.makeText(activity, "Failed to add song", Toast.LENGTH_SHORT).show()
                 }
-                    .addOnFailureListener{
-                        Toast.makeText(this, "Failed to save data", Toast.LENGTH_SHORT).show()
-                    }
             }
-            // add fragment code
+            findNavController().navigate(R.id.action_addSongFragment_to_mainFragment)
+
         }
 
 
@@ -107,4 +108,5 @@ class addSongFragment : Fragment() {
                 }
             }
     }
+
 }
