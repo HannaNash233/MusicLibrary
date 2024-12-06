@@ -1,14 +1,13 @@
 package com.example.musiclibraryfinal
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.musiclibraryfinal.SongsAdapter.ViewHolder
 
-class SongAdapter(val context: Context, val playlist: List<Song>): RecyclerView.Adapter<SongAdapter.ViewHolder>() {
+class SongAdapter(val context: FragmentActivity?, val playlist: List<Song>): RecyclerView.Adapter<SongAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -18,7 +17,9 @@ class SongAdapter(val context: Context, val playlist: List<Song>): RecyclerView.
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val song: Song = playlist[position]
+        val song = playlist[position]
+        holder.tvTitle.text = song.title
+        holder.tvArtist.text = song.artist
         holder.bind(song)
     }
 

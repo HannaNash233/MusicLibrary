@@ -49,7 +49,8 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         songRecycler = view.findViewById(R.id.rvSongs)
         val playlist = createSongs()
-        songRecycler.adapter = SongsAdapter(this, playlist)
+
+        val adapter = SongAdapter(activity, songs)
         // use get activity
         songRecycler.layoutManager = LinearLayoutManager(activity)
 
