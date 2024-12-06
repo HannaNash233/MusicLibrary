@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+data class Songs(val title: String, val artist: String, val genre: String,
+                 val pubYear: Int)
 
 /**
  * A simple [Fragment] subclass.
@@ -22,6 +26,8 @@ class MainFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var songRecycler: RecyclerView
+    private var songs = mutableListOf<Song>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +47,17 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        songRecycler = view.findViewById(R.id.rvSongs)
+        val playlist = createSongs()
+        songRecycler.adapter = SongsAdapter(this, playlist)
+        // use get activity
+        songRecycler.layoutManager = LinearLayoutManager(activity)
 
         val addButton: Button = view.findViewById(R.id.addButton)
         val deleteButton: Button = view.findViewById(R.id.deleteButton)
         addButton.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_addSongFragment)
+
         }
         deleteButton.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_deleteSongFragment)
@@ -74,7 +86,7 @@ class MainFragment : Fragment() {
     private fun createSongs():List<Song> {
         val songs = mutableListOf<Song>()
         for (i in 1..50) {
-            songs.add(Song("Song $i", "Artist $i", "Throat singing", 1999))
+            songs.add(Song("Song $i", "Artist $i", "Genre: $i", "Year: $i".toInt()))
         }
         return songs
     }
