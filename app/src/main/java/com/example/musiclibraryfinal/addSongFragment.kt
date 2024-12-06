@@ -67,15 +67,16 @@ class addSongFragment : Fragment() {
             val year = yearEdit.text.toString()
 
             if(songTitle.isEmpty() || artistName.isEmpty() || genre.isEmpty() || year.isEmpty()){
-                Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
             } else {
                 val song = Song(songTitle, artistName, genre, year.toInt())
 
                 ref.child(songTitle).setValue(song).addOnSuccessListener {
-                    Toast.makeText(this, "Song saved in playlist!", Toast.LENGTH_SHORT).show()
+                    songTitleEdit.text.clear()
+                    artistEdit.text.toString()
+                    genreEdit.text.toString()
+                    yearEdit.text.toString()
                 }
                     .addOnFailureListener{
-                        Toast.makeText(this, "Failed to save data", Toast.LENGTH_SHORT).show()
                     }
             }
             // add fragment code
