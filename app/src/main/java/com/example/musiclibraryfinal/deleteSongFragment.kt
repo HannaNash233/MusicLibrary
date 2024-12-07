@@ -32,8 +32,26 @@ class deleteSongFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        val deleteBTN = findViewById<Button>(R.id.deleteBTN)
-        val songTitleEdit = findViewById<EditText>(R.id.songTitleEdit)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_delete_song, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val backButton: Button = view.findViewById(R.id.backButton)
+        backButton.setOnClickListener {
+            findNavController().navigate(R.id.action_deleteSongFragment_to_mainFragment)
+        }
+
+        val deleteBTN = view.findViewById<Button>(R.id.deleteBTN)
+        val songTitleEdit = view.findViewById<EditText>(R.id.songTitleEdit)
 
         deleteBTN.setOnClickListener {
             val songTitle = songTitleEdit.text.toString()
@@ -60,23 +78,6 @@ class deleteSongFragment : Fragment() {
                         Toast.makeText(this, "Error deleting song", Toast.LENGTH_SHORT).show()
                     }
             }
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_delete_song, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val backButton: Button = view.findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            findNavController().navigate(R.id.action_deleteSongFragment_to_mainFragment)
         }
     }
 
