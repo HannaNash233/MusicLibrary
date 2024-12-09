@@ -72,9 +72,9 @@ class addSongFragment : Fragment() {
 
                 ref.child(songTitle).setValue(song).addOnSuccessListener {
                     songTitleEdit.text.clear()
-                    artistEdit.text.toString()
-                    genreEdit.text.toString()
-                    yearEdit.text.toString()
+                    artistEdit.text.clear()
+                    genreEdit.text.clear()
+                    yearEdit.text.clear()
                 }
                     .addOnFailureListener{
                     }
