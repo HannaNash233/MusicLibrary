@@ -26,6 +26,8 @@ class MainFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var songAdapter: SongAdapter
+    private lateinit var songDatabaseHelper: SongDatabaseHelper
     private lateinit var songRecycler: RecyclerView
     private var songs = mutableListOf<Song>()
 
@@ -50,9 +52,14 @@ class MainFragment : Fragment() {
         songRecycler = view.findViewById(R.id.rvSongs)
         val playlist = createSongs()
 
-        val adapter = SongAdapter(activity, songs)
+        songDatabaseHelper = SongDatabaseHelper.getInstance(requireContext())
+        songAdapter = SongAdapter(activity, songs)
         // use get activity
         songRecycler.layoutManager = LinearLayoutManager(activity)
+        songRecycler.adapter = songAdapter
+
+        songs = songDatabaseHelper.getAllItems().toMutableList()
+        songAdapter.updateSongs(songs)
 
         val addButton: Button = view.findViewById(R.id.addButton)
         val deleteButton: Button = view.findViewById(R.id.deleteButton)

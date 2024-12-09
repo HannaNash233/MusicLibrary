@@ -1,6 +1,7 @@
 package com.example.musiclibraryfinal
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -57,7 +58,7 @@ class deleteSongFragment : Fragment() {
             val songTitle = songTitleEdit.text.toString()
 
             if (songTitle.isEmpty()) {
-                Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
             }
             else {
                 // Initialize Firebase Database reference
@@ -71,11 +72,12 @@ class deleteSongFragment : Fragment() {
                 userRef.removeValue()
                     .addOnSuccessListener {
                         // Song deleted successfully
-                        Toast.makeText(this, "Song successfully deleted.", Toast.LENGTH_SHORT).show()
+                        Log.d("debug", "I've added")
+                        //Toast.makeText(this, "Song successfully deleted.", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener {
                         // Handle failure
-                        Toast.makeText(this, "Error deleting song", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "Error deleting song", Toast.LENGTH_SHORT).show()
                     }
             }
         }

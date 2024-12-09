@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 
-class SongAdapter(val context: FragmentActivity?, val playlist: List<Song>): RecyclerView.Adapter<SongAdapter.ViewHolder>() {
+class SongAdapter(val context: FragmentActivity?, var playlist: List<Song>): RecyclerView.Adapter<SongAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -25,6 +25,11 @@ class SongAdapter(val context: FragmentActivity?, val playlist: List<Song>): Rec
 
     override fun getItemCount(): Int {
         return playlist.size
+    }
+
+    fun updateSongs(newSongs: List<Song>) {
+        playlist = newSongs
+        notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
