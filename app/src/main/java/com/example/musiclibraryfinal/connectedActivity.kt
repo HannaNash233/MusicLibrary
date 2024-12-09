@@ -1,6 +1,7 @@
 package com.example.musiclibraryfinal
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -22,7 +23,7 @@ class connectedActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        Log.d("Debug", "In on create")
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -30,6 +31,7 @@ class connectedActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        Log.d("Debug", "In the menu")
         menuInflater.inflate(R.menu.mainmenu, menu)
         return true
     }
@@ -45,6 +47,7 @@ class connectedActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
+        Log.d("Debug", "In onSupportNavigate")
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp()||super.onSupportNavigateUp()
     }
