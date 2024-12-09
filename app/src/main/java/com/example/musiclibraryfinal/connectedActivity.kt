@@ -12,19 +12,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class connectedActivity : AppCompatActivity() {
+    private lateinit var songAdapter: SongAdapter
+    private lateinit var songDatabaseHelper: SongDatabaseHelper
+    private lateinit var songRecycler: RecyclerView
+    private var songs = mutableListOf<Song>()
     override fun onCreate(savedInstanceState: Bundle?) {
-        private lateinit var songAdapter: SongAdapter
-        private lateinit var songDatabaseHelper: SongDatabaseHelper
-        private lateinit var songRecycler: RecyclerView
-        private var songs = mutableListOf<Song>()
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_connected)
@@ -37,19 +33,12 @@ class connectedActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        songRecycler = findViewById(R.id.rvSongs)
-        val playlist = createSongs()
+        //songRecycler = findViewById(R.id.rvSongs)
+        //val songs = createSongs()
+        //val rvSongs = findViewById<RecyclerView>(R.id.rvSongs)
 
-        Log.d("Debug", "Test1")
-        songDatabaseHelper = SongDatabaseHelper.getInstance(this)
-        Log.d("Debug", "Test2")
-        songAdapter = SongAdapter(this, songs)
-        // use get activity
-        songRecycler.layoutManager = LinearLayoutManager(this)
-        songRecycler.adapter = songAdapter
-
-        songs = songDatabaseHelper.getAllItems().toMutableList()
-        songAdapter.updateSongs(songs)
+        //rvSongs.adapter = SongAdapter(this, songs)
+        //rvSongs.layoutManager = LinearLayoutManager(this)
 
     }
 
