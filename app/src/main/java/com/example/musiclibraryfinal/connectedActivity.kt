@@ -43,22 +43,14 @@ class connectedActivity : AppCompatActivity() {
         Log.d("Debug", "Test1")
         songDatabaseHelper = SongDatabaseHelper.getInstance(this)
         Log.d("Debug", "Test2")
-        songAdapter = SongAdapter(activity, songs)
+        songAdapter = SongAdapter(this, songs)
         // use get activity
-        songRecycler.layoutManager = LinearLayoutManager(activity)
+        songRecycler.layoutManager = LinearLayoutManager(this)
         songRecycler.adapter = songAdapter
 
         songs = songDatabaseHelper.getAllItems().toMutableList()
         songAdapter.updateSongs(songs)
 
-        addButton.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
-        deleteButton.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
