@@ -14,12 +14,18 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class connectedActivity : AppCompatActivity() {
     private lateinit var songAdapter: SongAdapter
-    private lateinit var songDatabaseHelper: SongDatabaseHelper
-    private lateinit var songRecycler: RecyclerView
-    private var songs = mutableListOf<Song>()
+    //private lateinit var songDatabaseHelper: SongDatabaseHelper
+    //private lateinit var songRecycler: RecyclerView
+    private lateinit var reference: DatabaseReference
+    private var playlist = mutableListOf<Song>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,13 +38,12 @@ class connectedActivity : AppCompatActivity() {
         Log.d("Debug", "In on create")
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        //val songRecycler = findViewById<RecyclerView>(R.id.rvSongs)
 
-        //songRecycler = findViewById(R.id.rvSongs)
-        //val songs = createSongs()
-        //val rvSongs = findViewById<RecyclerView>(R.id.rvSongs)
 
-        //rvSongs.adapter = SongAdapter(this, songs)
-        //rvSongs.layoutManager = LinearLayoutManager(this)
+        //songRecycler.adapter = SongAdapter(this, songs)
+        //songRecycler.layoutManager = LinearLayoutManager(this)
+        initalizeRV()
 
     }
 
@@ -51,7 +56,7 @@ class connectedActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) : Boolean {
         when (item.itemId) {
             R.id.menuMain -> {
-                Toast.makeText(this, "Main Menu clicked", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Playlist clicked", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, connectedActivity::class.java)
                 startActivity(intent)
             }
@@ -73,13 +78,58 @@ class connectedActivity : AppCompatActivity() {
         }
         return true
     }
+    private fun initalizeRV(){
+        val songRecycler = findViewById<RecyclerView>(R.id.rvSongs)
+        songAdapter = SongAdapter(this, playlist)
+        songRecycler.adapter = songAdapter
+        songRecycler.layoutManager = LinearLayoutManager(this)
 
-    private fun createSongs():List<Song> {
-        val songs = mutableListOf<Song>()
-        for (i in 1..50) {
-            songs.add(Song("Song $i", "Artist $i", "Genre: $i", "Year: $i".toInt()))
-        }
-        return songs
+        reference = FirebaseDatabase.getInstance().getReference("Songs")
+
+        reference.addChildEventListener(object: ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val song = snapshot.getValue(Song::class.java)
+                if (song != null){
+                    playlist.add(song)
+                    songAdapter.updatePlaylist(playlist)
+                }
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                val newSong = snapshot.getValue(Song::class.java)
+                if (newSong != null){
+                    val i = playlist.indexOfFirst{it.title == newSong.title}
+                    if (i != -1){
+                        playlist[i] = newSong
+                        songAdapter.notifyItemChanged(i)
+                    }
+                }
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+               val song = snapshot.getValue(Song::class.java)
+                if (song != null) {
+                    val i = playlist.indexOfFirst { it.title == song.title }
+                    if (i != -1){
+                        playlist.removeAt(i)
+                        songAdapter.notifyItemRemoved(i)
+                    }
+                }
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                Log.d("Debug", "Moved")
+                //nothing there
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("Debug", "Cancelled")
+                //nothing there
+            }
+
+        })
     }
+
+
 
 }
