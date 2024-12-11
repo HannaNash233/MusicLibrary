@@ -101,24 +101,27 @@ class connectedActivity : AppCompatActivity() {
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                val newSong = snapshot.getValue(Song::class.java)
+                /*val newSong = snapshot.getValue(Song::class.java)
                 if (newSong != null){
                     val i = playlist.indexOfFirst{it.title == newSong.title}
                     if (i != -1){
                         playlist[i] = newSong
                         songAdapter.notifyItemChanged(i)
                     }
-                }
+                }*/
+                songAdapter.notifyDataSetChanged()
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
                val song = snapshot.getValue(Song::class.java)
                 if (song != null) {
-                    val i = playlist.indexOfFirst { it.title == song.title }
-                    if (i != -1){
-                        playlist.removeAt(i)
-                        songAdapter.notifyItemRemoved(i)
-                    }
+                    playlist.remove(song)
+                    songAdapter.notifyDataSetChanged()
+                    //val i = playlist.indexOfFirst { it.title == song.title }
+                    //if (i != -1){
+                        //playlist.removeAt(i)
+                        //songAdapter.notifyItemRemoved(i)
+                    //}
                 }
             }
 

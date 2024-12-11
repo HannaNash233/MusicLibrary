@@ -96,29 +96,6 @@
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/yearAdd"
-        app:layout_constraintVertical_bias="0.294" />
+        app:layout_constraintVertical_bias="0.218" />
 
-    <Button
-        android:id="@+id/logoutBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.141"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addBTN"
-        app:layout_constraintVertical_bias="0.737" />
-
-    <Button
-        android:id="@+id/playlistViewBTN"
-        android:layout_width="134dp"
-        android:layout_height="50dp"
-        android:text="Check your Playlist"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.819"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addBTN"
-        app:layout_constraintVertical_bias="0.746" />
 </androidx.constraintlayout.widget.ConstraintLayout>

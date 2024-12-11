@@ -3,12 +3,14 @@ package com.example.musiclibraryfinal
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.database.FirebaseDatabase
@@ -25,6 +27,9 @@ class deleteSongActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         val songNameEditText: EditText = findViewById(R.id.songNameEditText)
         val deleteButton: Button = findViewById(R.id.deleteBTN)
@@ -50,6 +55,11 @@ class deleteSongActivity : AppCompatActivity() {
                     }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.mainmenu, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem) : Boolean {
