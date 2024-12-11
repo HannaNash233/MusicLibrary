@@ -75,6 +75,6 @@ class deleteSongActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-        return true
+        return true // This returns true
     }
 }
