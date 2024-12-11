@@ -70,6 +70,11 @@ class connectedActivity : AppCompatActivity() {
                 val intent = Intent(this, deleteSongActivity::class.java)
                 startActivity(intent)
             }
+            R.id.menuSearch -> {
+                Toast.makeText(this, "Search for Song clicked", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, searchSongActivity::class.java)
+                startActivity(intent)
+            }
             R.id.menuLogout -> {
                 Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, LoginActivity::class.java)

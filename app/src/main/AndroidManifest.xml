@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MusicLibraryFinal"
         tools:targetApi="31">
         <activity
+            android:name=".searchSongActivity"
+            android:exported="false" />
+        <activity
             android:name=".deleteSongActivity"
             android:exported="false" />
         <activity
