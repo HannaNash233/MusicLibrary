@@ -12,6 +12,9 @@
         android:id="@+id/menuDelete"
         android:title="Delete Song" />
     <item
+        android:id="@+id/menuSearch"
+        android:title="Search for Song" />
+    <item
         android:id="@+id/menuLogout"
         android:title="Logout" />
 </menu>
