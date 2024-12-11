@@ -2,6 +2,7 @@ package com.example.musiclibraryfinal
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -58,5 +59,31 @@ class addSongActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean {
+        when (item.itemId) {
+            R.id.menuMain -> {
+                Toast.makeText(this, "Playlist clicked", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, connectedActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.menuAdd -> {
+                Toast.makeText(this, "Add Song clicked", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, addSongActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.menuDelete -> {
+                Toast.makeText(this, "Delete Song clicked", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, deleteSongActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.menuLogout -> {
+                Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return true
     }
 }
