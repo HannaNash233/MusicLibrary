@@ -80,6 +80,6 @@ class deleteSongActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-        return true // This returns true
+        return true
     }
 }
