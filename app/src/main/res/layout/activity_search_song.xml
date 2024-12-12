@@ -20,4 +20,132 @@
         tools:layout_editor_absoluteY="-4dp"
         tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/tv_title_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="Search for a song:"
+        android:textSize="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/et_title_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:minHeight="48dp"
+        android:ems="10"
+        android:hint="Song name"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_display"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="search"
+        app:layout_constraintTop_toBottomOf="@+id/et_title_search"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/tv_labelTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="58dp"
+        android:text="Title:"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_search" />
+
+    <TextView
+        android:id="@+id/tv_labelArtist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="23dp"
+        android:text="Artist:"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_labelTitle" />
+
+    <TextView
+        android:id="@+id/tv_labelGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="23dp"
+        android:text="Genre:"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_labelArtist" />
+
+    <TextView
+        android:id="@+id/tv_labelYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="23dp"
+        android:text="Year:"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_labelGenre" />
+
+    <TextView
+        android:id="@+id/tv_dataTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="58dp"
+        android:text="title"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_labelTitle"
+        app:layout_constraintTop_toBottomOf="@+id/btn_search" />
+
+    <TextView
+        android:id="@+id/tv_dataArtist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="23dp"
+        android:text="author"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_labelTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dataTitle" />
+
+    <TextView
+        android:id="@+id/tv_dataGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="23dp"
+        android:text="genre"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_labelGenre"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dataArtist" />
+
+    <TextView
+        android:id="@+id/tv_dataYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="23dp"
+        android:text="year"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_labelYear"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dataGenre" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
